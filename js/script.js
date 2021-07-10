@@ -24,9 +24,38 @@ const titleClickHandler = function(event){
   
     targetArticle.classList.add('active'); /* add class 'active' to the correct article */
   }
+
+const optArticleSelector = '.post',
+optTitleSelector = '.post-title',
+optTitleListSelector = '.titles';
+
+function generateTitleLinks(){
+
+const titleList = document.querySelector(optTitleListSelector);  /* remove contents of titleList */
+titleList.innerHTML = '';
+
+const articles = document.querySelectorAll(optArticleSelector);
+
+let html = '';
+
+for(let article of articles) {   /* for each article */
+
+    const articleId = article.getAttribute('id'); /* get the article id */
+
+    const articleTitle = article.querySelector(optTitleSelector).innerHTML; /* find the title element */ /* get the title from the title element */
+
+    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>'; /* create HTML of the link */
+
+    html = html + linkHTML; /* insert link into titleList */
+    }
+    titleList.innerHTML = html;
+
+    const links = document.querySelectorAll('.titles a');
   
-  const links = document.querySelectorAll('.titles a');
-  
-  for(let link of links){
-    link.addEventListener('click', titleClickHandler);
-  }
+    for(let link of links){
+      link.addEventListener('click', titleClickHandler);
+    }
+}
+
+generateTitleLinks();
+
